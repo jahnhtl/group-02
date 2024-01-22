@@ -12,11 +12,16 @@ int ButtonState = 0;
 int EmergencyButtonState = 0;
 int buttonPressed = 0;
 
+<<<<<<< HEAD
 int leftSpeed = 200;  // Geschwindigkeit für linken Motor (0-255)
 int rightSpeed = 200; // Geschwindigkeit für rechten Motor (0-255)
 
 float convertedDistance;
 float convertedDistance2;
+=======
+int leftSpeed = 255;  // Geschwindigkeit für linken Motor (0-255)
+int rightSpeed = 255; // Geschwindigkeit für rechten Motor (0-255)
+>>>>>>> 90bf1e686dd20c2e3773a6dcc0cee0784d51c582
 
 void setup() {
   pinMode(Button, INPUT_PULLUP);
@@ -61,6 +66,7 @@ void stopCar() {
 
 void convertToCentimeters(int rawValue) {
   // Hier verwenden Sie die spezifische Umrechnungsformel für Ihren Sensor
+<<<<<<< HEAD
    convertedDistance = 4800 / (rawValue - 20.0);  // Anpassung hier
    if(convertedDistance > 80){
     convertedDistance = 80;
@@ -80,6 +86,11 @@ void convertToCentimeters2(int rawValue) {
 }
 
 
+=======
+  convertedDistance = 4800 / (rawValue - 20.0);  // Anpassung hier
+}
+
+>>>>>>> 90bf1e686dd20c2e3773a6dcc0cee0784d51c582
 void loop() {
   ButtonState = digitalRead(Button);
   EmergencyButtonState = digitalRead(EmergencyButton);
@@ -96,6 +107,7 @@ void loop() {
     digitalWrite(5, LOW);
     buttonPressed = 0;
   } else {
+<<<<<<< HEAD
         float distanceLeft = analogRead(SharpSensorLeft);
         float distanceRight = analogRead(SharpSensorRight);
         float distanceForward = analogRead(ThresholdDistance);
@@ -138,6 +150,53 @@ void loop() {
         if (convertedDistanceRight < 20) {
           moveLeft();
         }
+=======
+    float distanceLeft = analogRead(SharpSensorLeft);
+    float distanceRight = analogRead(SharpSensorRight);
+    float distanceForward = analogRead(ThresholdDistance);
+
+    convertToCentimeters(distanceLeft);
+    float convertedDistanceLeft = convertedDistance;
+  
+    convertToCentimeters(distanceRight);
+    float convertedDistanceRight = convertedDistance;
+  
+    convertToCentimeters(distanceForward);
+    float convertedDistanceForward = convertedDistance;
+
+    // Ausgabe der Sensorwerte auf dem seriellen Monitor
+    Serial.print("Distance Left: ");
+    Serial.print(convertedDistanceLeft);
+    Serial.print(" cm\t");
+
+    Serial.print("Distance Right: ");
+    Serial.print(convertedDistanceRight);
+    Serial.println(" cm");
+
+    Serial.print("Distance Forward: ");
+    Serial.print(convertedDistanceForward);
+    Serial.println(" cm");
+
+    // Überprüfen Sie, ob auf der linken Seite ein Hindernis ist
+    if (convertedDistanceRight < 15) {
+      moveRight();
+    }
+
+    // Überprüfen Sie, ob auf der rechten Seite ein Hindernis ist
+    if (convertedDistanceLeft < 15) {
+      moveLeft();
+    }
+
+    // Wenn Hindernis erkannt, fahre rückwärts und dann, falls links oder rechts frei, fahre zur freien Stelle
+    if (cnvertedDistanceLeft < 15 || convertedDistanceRight < 15) {
+      moveBackwards();
+    
+      // Hier könntest du weitere Logik hinzufügen, um zur freien Stelle zu fahren, wenn möglich
+    } else {
+      // Kein Hindernis erkannt, vorwärts bewegen
+      moveForward();
+    }
+>>>>>>> 90bf1e686dd20c2e3773a6dcc0cee0784d51c582
       }
 
   // Eine kurze Verzögerung für die Stabilität der seriellen Kommunikation
