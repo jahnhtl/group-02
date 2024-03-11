@@ -40,22 +40,22 @@ void setup() {
 
 
 void convertToCentimeters(int rawValue) {
-  // Hier verwenden Sie die spezifische Umrechnungsformel für Ihren Sensor
-   convertedDistance = 4800 / (rawValue - 20.0);  // Anpassung hier
+  // Hier verwenden Sie die spezifische Umrechnungsformel für Ihren Sensor  
+   convertedDistance = (uint16_t) (6000 / (rawValue - 6.89))-4;  // Anpassung hier
    if(convertedDistance > 80){
-    convertedDistance = 80;
+    convertedDistance = 81;
    }else if(convertedDistance < 10){
-    convertedDistance=0;
+    convertedDistance=9;
    }
 }
 
 void convertToCentimeters2(int rawValue) {
   // Hier verwenden Sie die spezifische Umrechnungsformel für Ihren Sensor
-   convertedDistance2 = 4800 / (rawValue - 20.0);  // Anpassung hier
-   if(convertedDistance2 > 120){
-    convertedDistance2 = 120;
+   convertedDistance2 = (uint16_t) (16256 / (rawValue + 22.8))-8;  // Anpassung hier
+   if(convertedDistance2 > 150){
+    convertedDistance2 = 151;
    }else if(convertedDistance2 < 20){
-    convertedDistance2=0;
+    convertedDistance2=19;
    }
 }
 /*
@@ -70,12 +70,12 @@ void Mittenregelung(){
           analogWrite(LEFT_MOTOR_PIN, leftSpeed / 5);
           analogWrite(RIGHT_MOTOR_PIN, rightSpeed);
         } else {
-*/          // Das Auto befindet sich in der Mitte, geradeaus fahren
+          // Das Auto befindet sich in der Mitte, geradeaus fahren
           analogWrite(LEFT_MOTOR_PIN, leftSpeed);
           analogWrite(RIGHT_MOTOR_PIN, rightSpeed);
         }
 }
-
+*/
 void loop() {
     ButtonState = digitalRead(Button);
     EmergencyButtonState = digitalRead(EmergencyButton);
