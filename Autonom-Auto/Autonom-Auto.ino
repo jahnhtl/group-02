@@ -58,7 +58,7 @@ void convertToCentimeters2(int rawValue) {
     convertedDistance2=0;
    }
 }
-
+/*
 void Mittenregelung(){
   int convertedDistanceLeft=0, convertedDistanceRight=0;
   if (convertedDistanceLeft > convertedDistanceRight + Toleranz) {
@@ -70,7 +70,7 @@ void Mittenregelung(){
           analogWrite(LEFT_MOTOR_PIN, leftSpeed / 5);
           analogWrite(RIGHT_MOTOR_PIN, rightSpeed);
         } else {
-          // Das Auto befindet sich in der Mitte, geradeaus fahren
+*/          // Das Auto befindet sich in der Mitte, geradeaus fahren
           analogWrite(LEFT_MOTOR_PIN, leftSpeed);
           analogWrite(RIGHT_MOTOR_PIN, rightSpeed);
         }
@@ -118,7 +118,7 @@ void loop() {
          Serial.print(convertedDistanceForward);
          Serial.print(" cm\t");
         
-        Mittenregelung();
+        //Mittenregelung();
 
         if(convertedDistanceForward < 50 && convertedDistanceForward >= 30 && convertedDistanceRight < 35){
           analogWrite(RIGHT_MOTOR_PIN, rightSpeed);
